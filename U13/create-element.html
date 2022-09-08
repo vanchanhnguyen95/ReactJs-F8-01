@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create element</title>
+</head>
+<body>
+    <!-- 
+        1.document.createElement()
+        2.document.body.appendChild()
+        3.console.dir()
+        4. innerText, id, className, style
+    -->
+    <!-- <h1 id="heading">Hello guys!</h1> -->
+    <div id="root"></div>
+    <script>
+        // 1.document.createElement()
+        // const h1 = document.querySelector('#heading')
+        // console.log(h1)
+        // console.dir(h1)
+
+        // 2.document.body.appendChild()
+        // const h1 = document.createElement('h1')
+        // h1.innerText = 'Hello guys!';
+        // console.log(h1);
+        // document.body.appendChild(h1)
+
+        // 3. Thêm giao diện vào thẻ div#root có id sẵn có
+        // const root = document.getElementById('root');
+        // const h1 = document.createElement('h1')
+        // h1.innerText = 'Hello guys!';
+        // console.log(h1);
+        // root.appendChild(h1)
+
+        // 3. Thêm giao diện vào id, className bằng javascript
+        const root = document.getElementById('root');
+        const h1 = document.createElement('h1')
+        h1.innerText = 'Hello guys!';
+        h1.id = 'heading';
+        h1.className = 'test class-2';
+        h1.style = 'color:green;';
+        Object.assign(h1.style, {
+            fontSize: '50px'
+        })
+        console.log(h1);
+        root.appendChild(h1)
+    </script>
+</body>
+</html>
