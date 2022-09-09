@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>props</title>
+    <script crossorigin src="https://unpkg.com/react@17.0.0/umd/react.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@17.0.0/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+</head>
+<body>
+    <!-- 
+        Props
+        - React elements
+           - Sử dụng props giống như với attribute của thẻ HTML
+           - 2 props, class, for => className, htmlFor
+           - Phải tuần theo quy ước có sẵn
+        - React components
+          - Sử dụng props giống như đối số cho Component
+          - Tự do đặt tên props
+            - Đặt theo camelCase
+            - * Có thể bao gồm dấu gách ngang
+        - Chú ý:
+          - Prop "key" là prop đặc biệt
+          - Props cơ bản là đối số của Component
+            => Props có thể là bất cứ kiểu dữ liệu gì
+          - Sử dụng destructuring
+     -->
+
+    <div id="root"></div>
+    <script type="text/babel">
+
+        // PostItem.js
+        function PostItem({
+            image,
+            title,
+            descripton,
+            publishedAt,
+            callback = () => {}
+        }) {
+            return (
+                <div className="post-item">
+                    <img 
+                        src = {image}
+                        alt = {title}
+                    />
+                    <h2 className="post-title">{title}</h2>
+                    <p className="post-desc">{descripton}</p>
+                    <p className="post-published">{publishedAt}</p>
+                </div>
+
+            )
+        }
+
+        // App.js
+        function App() {
+            return (
+                <div id="wrapper">
+                    <PostItem
+                        title="1 C#(.NET) - Tương tác với file"
+                        image="https://cdn.tgdd.vn/hoi-dap/1321801/javascript-la-gi-co-vai-tro-gi-cach-bat-javascript-tren.001.jpg"
+                        descripton="Bạn có kiến thức ngôn ngữ C#"
+                        publishedAt="Một ngày trước . 5 phút"
+                    />
+                    <PostItem
+                        title="2 C#(.NET) - Tương tác với file"
+                        image="https://cdn.tgdd.vn/hoi-dap/1321801/javascript-la-gi-co-vai-tro-gi-cach-bat-javascript-tren.001.jpg"
+                        descripton="Bạn có kiến thức ngôn ngữ C#"
+                        publishedAt="Một ngày trước . 5 phút"
+                    />
+                    <PostItem
+                        title="3 C#(.NET) - Tương tác với file"
+                        image="https://cdn.tgdd.vn/hoi-dap/1321801/javascript-la-gi-co-vai-tro-gi-cach-bat-javascript-tren.001.jpg"
+                        descripton="Bạn có kiến thức ngôn ngữ C#"
+                        publishedAt="Một ngày trước . 5 phút"
+                    />
+                </div>
+            )
+        }
+
+
+        // index.js
+        ReactDOM.render(<App />, document.getElementById('root'))
+    </script>
+</body>
+</html>
