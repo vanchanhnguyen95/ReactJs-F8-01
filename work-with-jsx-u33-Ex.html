@@ -37,69 +37,102 @@
     <div id="root"></div>
     <script type="text/babel">
 
-        // Ví dụ render từng kiểu input
-        // const Form = {
-        //     Input() {
-        //         return <input />
-        //     },
-        //     Checkbox() {
-        //         return <input type="checkbox" />
-        //     }
+        // 1. Cách render Button
+        // function Button({title, primary}) {
+        //     console.log(primary)
+        //     return <button>{title}</button>
         // }
 
-        // function App() {
-        //     const type = 'Checkbox'
-        //     const Component = Form[type]
+        // function App({title, content}) {
         //     return (
         //         <div id="wrapper">
-        //            <Component />
+        //           <Button primary title={"Hello anh em!"} />
         //         </div>
         //     )
         // }
 
-        // Custtom Button, khi click vào sẽ link đến 1 url khác: nó tự động thay đổi:khi là thẻ a
-        //, khi là button
-        // function Button({title, href, onClick}) {
-        //     let Component = 'button'
-        //     const props = {}
-
-        //     if(href) {
-        //         Component = 'a'
-        //         props.href = href;
-        //     }
-
-        //     if(onClick) {
-        //         props.onClick = onClick
-        //     }
-            
-
-        //     console.log(props);
+        // 2. Cách render Input
+        // function Input({ label, ...inputProps }) {
         //     return (
-        //         <Component {...props}>{title} </Component>
-        //     )
-        // }
-
-        // function App() {
-
-        //     return (
-        //         <div id="wrapper">
-        //             <Button 
-        //                 title="Click me!"
-        //                 href="https://fullstack.edu.vn/learning/reactjs/"
-        //                 onClick = {() => console.log(Math.random()) }
-        //             />
+        //         <div>
+        //             <label>{ label }</label>
+        //             <input {...inputProps} />
         //         </div>
         //     )
         // }
 
+        //     function App() {
+        //         return (
+        //             <div id="wrapper">
+        //                 <Input
+        //                     label = "FullName"
+        //                     text="text"
+        //                     placeholder = "Enter name..."
+        //                     title="Day la input"
+        //                     onFocus={() => {console.log(Math.random)}}
+        //                 />
+        //             </div>
+        //         )
+        // }
 
-        function App({title, content}) {
+        // 3. Dùng Button giống Html
+        // function Button({ children }) {
+        //     return <button>{children}</button>
+        // }
+
+        // function App() {
+        //     return (
+        //         <div id="wrapper">
+        //             <Button> {false && "Click me!"}</Button>
+        //         </div>
+        //     )
+        // }
+
+        //4. Truyền function vào props children cơ chế rẽ render ra code nhu thế nào
+        // Cách 1: đơn giản, truyền 1 data từ app
+        // function List({data, children}) {
+        //     console.log(children);
+        //     return (
+        //         <ul>
+        //             {data.map(item => <li key={item}>{item}</li>)}
+        //         </ul>
+        //     )
+        // }
+
+        // function App() {
+        //     const cars = ['BMW', 'Honda', 'Mazda']
+
+        //     return (
+        //         <div id="wrapper">
+        //             <List data={cars}/>
+        //         </div>
+        //     )
+        // }
+
+        //5. Truyền function vào props children cơ chế rẽ render ra code nhu thế nào
+        // Cách 2: truyền 1 list chi tiết
+        function List({data, children}) {
+            console.log(children);
+            return (
+                <ul>
+                    {data.map((...props) => children(...props))}
+                </ul>
+            )
+        }
+
+        function App() {
+            const cars = ['BMW', 'Honda', 'Mazda']
+
             return (
                 <div id="wrapper">
-                  <h1>{title || 'Giá trị mặc định'}</h1>
+                    <List data={cars}>
+                        {(item, index) => <li key={index}>{item}</li>}
+                    </List>
                 </div>
             )
         }
+        
+
         ReactDOM.render(<App />, document.getElementById('root'));
     </script>
 </body>
